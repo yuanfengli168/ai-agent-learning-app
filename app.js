@@ -1,3 +1,43 @@
+const ALL_SOURCES = [
+  { id: 'anthropic', name: 'Anthropic — "Building Effective Agents"', desc: 'Practical guide to agent patterns: prompt chaining, routing, parallelization, orchestrator-workers, evaluator-optimizer.', url: 'https://www.anthropic.com/engineering/building-effective-agents' },
+  { id: 'weng', name: 'Lilian Weng — "LLM Powered Autonomous Agents"', desc: 'Foundational blog post on agent architecture: planning, memory, and tool use.', url: 'https://lilianweng.github.io/posts/2023-06-23-agent/' },
+  { id: 'openai-tools', name: 'OpenAI — "New Tools for Building Agents"', desc: 'Responses API, Agents SDK, built-in tools, and observability.', url: 'https://openai.com/index/new-tools-for-building-agents/' },
+  { id: 'nvidia', name: 'NVIDIA — "What Are Autonomous AI Agents?"', desc: 'Overview of agent components, how they work together, and guardrails/safety.', url: 'https://www.nvidia.com/en-us/glossary/ai-agents/' },
+  { id: 'databricks', name: 'Databricks — "What Are AI Agents?"', desc: 'Agent types, key principles, and market projections ($5B→$52B by 2030).', url: 'https://www.databricks.com/blog/what-are-ai-agents' },
+  { id: 'react', name: 'ReAct: Synergizing Reasoning and Acting (Yao et al., 2022)', desc: 'Interleaving reasoning traces with task-specific actions outperforms either alone.', url: 'https://arxiv.org/abs/2210.03629' },
+  { id: 'reflexion', name: 'Reflexion: Language Agents with Verbal Reinforcement Learning (Shinn et al., 2023)', desc: 'Verbal self-reflection improves agents without weight updates. 91% on HumanEval.', url: 'https://arxiv.org/abs/2303.11366' },
+  { id: 'gen-agents', name: 'Generative Agents: Interactive Simulacra (Park et al., 2023)', desc: 'Stanford "Smallville" simulation — memory, reflection, and emergent social behavior.', url: 'https://arxiv.org/abs/2304.03442' },
+  { id: 'gitm', name: 'GITM: Generally Capable Agents for Open-World Environments (Zhu et al., 2023)', desc: 'LLM agents in Minecraft using text knowledge and memory. +47.5% over prior methods.', url: 'https://arxiv.org/abs/2305.17144' },
+  { id: 'crewai', name: 'CrewAI Documentation', desc: 'Python framework for role-playing autonomous agents. Agents, Tasks, Crews, Flows.', url: 'https://docs.crewai.com/en/concepts/crews.md' },
+  { id: 'langgraph', name: 'LangGraph Concepts', desc: 'Graph-based framework for stateful, multi-actor agent workflows with cycles and branching.', url: 'https://langchain-ai.github.io/langgraph/concepts/' },
+  { id: 'prompt-guide', name: 'Prompt Engineering Guide — ReAct', desc: 'Practical ReAct prompting guide with examples and LangChain integration.', url: 'https://www.promptingguide.ai/techniques/react' },
+  { id: 'willison', name: 'Simon Willison — AI Agents', desc: 'Practical perspectives on what constitutes an agent vs. a prompt chain.', url: 'https://simonwillison.net/2024/Mar/12/ai-agents/' },
+  { id: 'openai-assistants', name: 'OpenAI Assistants API', desc: 'Hosted agent API with persistent threads, tools, and file search.', url: 'https://platform.openai.com/docs/assistants/overview' }
+];
+
+const TOPIC_SOURCES = {
+  'what-are-ai-agents': ['weng', 'databricks', 'nvidia'],
+  'architecture-patterns': ['anthropic', 'react', 'reflexion', 'prompt-guide'],
+  'frameworks-tools': ['crewai', 'langgraph', 'openai-tools', 'openai-assistants'],
+  'memory-context': ['gen-agents', 'weng'],
+  'tool-use': ['openai-tools', 'react', 'prompt-guide'],
+  'multi-agent': ['crewai', 'gitm', 'willison'],
+  'real-world-apps': ['anthropic', 'weng', 'openai-tools', 'nvidia', 'databricks', 'react', 'reflexion', 'gen-agents', 'gitm', 'crewai', 'langgraph', 'prompt-guide', 'willison', 'openai-assistants'],
+  'building-shipping': ['anthropic', 'willison', 'nvidia'],
+  'business-opportunities': ['databricks', 'openai-tools'],
+  'future-directions': ['anthropic', 'weng', 'openai-tools', 'nvidia', 'databricks', 'react', 'reflexion', 'gen-agents', 'gitm', 'crewai', 'langgraph', 'prompt-guide', 'willison', 'openai-assistants']
+};
+
+function sourcesHTML(topicId) {
+  const ids = TOPIC_SOURCES[topicId] || [];
+  if (!ids.length) return '';
+  const items = ids.map(id => {
+    const s = ALL_SOURCES.find(x => x.id === id);
+    return s ? `<a href="${s.url}" target="_blank" rel="noopener noreferrer" class="source-link">📖 ${s.name}</a>` : '';
+  }).join('');
+  return `<div class="lesson-sources"><div class="sources-divider"></div><div class="sources-heading">Sources</div><div class="sources-list">${items}</div></div>`;
+}
+
 const TOPICS = [
   {
     id: 'what-are-ai-agents',
@@ -541,7 +581,7 @@ function openLesson(topicId, subIdx) {
   const actions = document.getElementById('lessonActions');
 
   title.textContent = `${topic.subtopics[subIdx]}`;
-  content.innerHTML = topic.lessons[subIdx];
+  content.innerHTML = topic.lessons[subIdx] + sourcesHTML(topicId);
   actions.innerHTML = `
     <button class="lesson-btn lesson-learned" onclick="markLesson('${topicId}', ${subIdx}, 'learning')">⟳ Mark as Learning</button>
     <button class="lesson-btn lesson-mastered" onclick="markLesson('${topicId}', ${subIdx}, 'mastered')">✓ Mark as Mastered</button>
@@ -745,6 +785,17 @@ function spawnConfetti() {
 }
 
 // ==================== Event Listeners ====================
+
+document.getElementById('referencesBtn').addEventListener('click', () => {
+  const list = document.getElementById('referencesList');
+  list.innerHTML = ALL_SOURCES.map(s => `
+    <div class="ref-item">
+      <a href="${s.url}" target="_blank" rel="noopener noreferrer" class="ref-name">📖 ${s.name}</a>
+      <div class="ref-desc">${s.desc}</div>
+    </div>
+  `).join('');
+  document.getElementById('referencesOverlay').classList.add('active');
+});
 
 document.getElementById('resetBtn').addEventListener('click', () => {
   document.getElementById('modalOverlay').classList.add('active');

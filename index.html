@@ -21,6 +21,7 @@
         </div>
       </div>
       <button class="reset-btn" id="resetBtn">🔄 Reset All</button>
+      <button class="reset-btn" id="referencesBtn" style="margin-left:8px">📚 References</button>
     </header>
     <main class="topics" id="topicsContainer"></main>
   </div>
@@ -66,5 +67,12 @@
   </div>
 
   <script src="app.js"></script>
+<div id="referencesOverlay" class="modal-overlay">
+  <div class="modal-content references-modal">
+    <h2>📚 All References</h2>
+    <div id="referencesList"></div>
+    <button class="quiz-btn-close" onclick="document.getElementById('referencesOverlay').classList.remove('active')">✓ Close</button>
+  </div>
+</div>
 </body>
 </html>

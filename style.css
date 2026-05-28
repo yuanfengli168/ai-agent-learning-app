@@ -831,3 +831,19 @@ body {
   .quiz-question { font-size: 1rem; }
   .quiz-option { padding: 14px; font-size: 0.9rem; }
 }
+/* Sources in lessons */
+.lesson-sources { margin-top: 24px; }
+.sources-divider { height: 1px; background: var(--border); margin-bottom: 12px; opacity: 0.5; }
+.sources-heading { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-bottom: 8px; }
+.sources-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.source-link { font-size: 0.72rem; color: var(--text-muted); text-decoration: none; padding: 3px 8px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; transition: background 0.2s, color 0.2s; }
+.source-link:hover { background: var(--accent); color: #fff; }
+
+/* References modal */
+.references-modal { max-width: 700px; }
+.references-modal h2 { margin-bottom: 16px; }
+#referencesList { display: flex; flex-direction: column; gap: 12px; max-height: 60vh; overflow-y: auto; }
+.ref-item { padding: 10px 14px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; }
+.ref-name { font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none; }
+.ref-name:hover { text-decoration: underline; }
+.ref-desc { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; }
