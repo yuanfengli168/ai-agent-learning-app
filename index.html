@@ -24,16 +24,20 @@
     </header>
     <main class="topics" id="topicsContainer"></main>
   </div>
+
+  <!-- Reset Modal -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <h2>⚠️ Reset Progress?</h2>
-      <p>This will reset all subtopics to "Not Started". This cannot be undone.</p>
+      <p>This will reset all subtopics and quiz results to "Not Started". This cannot be undone.</p>
       <div class="modal-actions">
         <button class="modal-btn cancel" id="cancelReset">Cancel</button>
         <button class="modal-btn confirm" id="confirmReset">Reset All</button>
       </div>
     </div>
   </div>
+
+  <!-- Celebration -->
   <div class="celebration" id="celebration">
     <div class="celebration-content">
       <div class="trophy">🏆</div>
@@ -42,6 +46,25 @@
       <button class="modal-btn confirm" id="closeCelebration">Awesome!</button>
     </div>
   </div>
+
+  <!-- Lesson Overlay -->
+  <div class="lesson-overlay" id="lessonOverlay">
+    <div class="lesson-panel">
+      <button class="lesson-close" onclick="closeLesson()">← Back</button>
+      <h2 class="lesson-title" id="lessonTitle"></h2>
+      <div class="lesson-body" id="lessonContent"></div>
+      <div class="lesson-actions" id="lessonActions"></div>
+    </div>
+  </div>
+
+  <!-- Quiz Overlay -->
+  <div class="quiz-overlay" id="quizOverlay">
+    <div class="quiz-panel">
+      <button class="quiz-close" onclick="closeQuiz()">✕</button>
+      <div class="quiz-content" id="quizContent"></div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
