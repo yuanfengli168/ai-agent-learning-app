@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agents Mastery Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>🤖 AI Agents Mastery Tracker</h1>
+      <p class="subtitle">Track your journey from curiosity to mastery</p>
+      <div class="overall-progress">
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="overallBar"></div>
+        </div>
+        <div class="progress-stats">
+          <span id="overallPercent">0%</span>
+          <span id="overallDetail">0 / 0 subtopics mastered</span>
+        </div>
+      </div>
+      <button class="reset-btn" id="resetBtn">🔄 Reset All</button>
+    </header>
+    <main class="topics" id="topicsContainer"></main>
+  </div>
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h2>⚠️ Reset Progress?</h2>
+      <p>This will reset all subtopics to "Not Started". This cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" id="cancelReset">Cancel</button>
+        <button class="modal-btn confirm" id="confirmReset">Reset All</button>
+      </div>
+    </div>
+  </div>
+  <div class="celebration" id="celebration">
+    <div class="celebration-content">
+      <div class="trophy">🏆</div>
+      <h2>Topic Mastered!</h2>
+      <p id="celebrationText"></p>
+      <button class="modal-btn confirm" id="closeCelebration">Awesome!</button>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
